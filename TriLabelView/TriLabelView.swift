@@ -39,10 +39,10 @@ import Foundation
         switch position {
         case .TopRight:
             pointValues = [viewSize, 0, viewSize, length, viewSize - length, 0, viewSize, 0]
-            //        case .BottomLeft:
-            //
-            //        case .BottomRight:
-            
+        case .BottomLeft:
+            pointValues = [0, viewSize, 0, viewSize - length, length, viewSize, 0, viewSize]
+        case .BottomRight:
+            pointValues = [viewSize, viewSize, viewSize, viewSize - length, viewSize - length, viewSize, viewSize, viewSize]
         default:
             // Default is TopLeft
             pointValues = [0, 0, 0, length, length, 0, 0, 0]
@@ -74,8 +74,6 @@ import Foundation
     private func addSecondLabelView() {
         var x = CGFloat()
         var y = CGFloat()
-        length = (lengthPercentage/100)*min(bounds.width, bounds.height)
-        viewSize = min(bounds.width, bounds.height)
         switch position {
         case .TopRight:
             x = viewSize
