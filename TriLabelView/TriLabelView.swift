@@ -82,23 +82,31 @@ import Foundation
     private func addSecondLabelView() {
         var x = CGFloat()
         var y = CGFloat()
+        var labelAngle:CGFloat = 0
         switch position {
         case .TopRight:
-            x = viewSize
-            y = 0.1 * length
-            //        case .BottomRight:
-            //
-            //        case .BottomLeft:
-        //
+            x = (viewSize - (0.8*length))
+            y = 0.2*length
+            labelAngle = (3.14/4)
+        case .BottomRight:
+            x = (viewSize - (0.8*length))
+            y = (viewSize - (0.5*length))
+            labelAngle = (-3.14/4)
+        case .BottomLeft:
+            x = (-0.2*length)
+            y = (viewSize - (0.5*length))
+            labelAngle = (3.14/4)
         default:
-            x = 0
-            y = 0.1 * length
+            x = (-0.2*length)
+            y = 0.2*length
+            labelAngle = (7*(3.14/4))
         }
         let firstLabel = UILabel()
         firstLabel.frame = CGRectMake(x, y, length, 0.3*length)
         firstLabel.text = firstLabelText
-        firstLabel.transform = CGAffineTransformMakeRotation(3*(3.14/2) + (3.14/4))
+        firstLabel.transform = CGAffineTransformMakeRotation(labelAngle)
         //        firstLabel.backgroundColor = UIColor.brownColor()
+        firstLabel.textAlignment = .Center
         firstLabel.changeFont(fontSize)
         self.addSubview(firstLabel)
     }
