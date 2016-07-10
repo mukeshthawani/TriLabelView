@@ -10,6 +10,7 @@
 		8BD2DA691D3235AE00AFEF44 /* TriLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BD2DA681D3235AE00AFEF44 /* TriLabelView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8BD2DA701D3235AE00AFEF44 /* TriLabelView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD2DA651D3235AE00AFEF44 /* TriLabelView.framework */; };
 		8BD2DA751D3235AE00AFEF44 /* TriLabelViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2DA741D3235AE00AFEF44 /* TriLabelViewTests.swift */; };
+		8BD2DA801D32386500AFEF44 /* TriLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2DA7F1D32386500AFEF44 /* TriLabelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		8BD2DA6F1D3235AE00AFEF44 /* TriLabelViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriLabelViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD2DA741D3235AE00AFEF44 /* TriLabelViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriLabelViewTests.swift; sourceTree = "<group>"; };
 		8BD2DA761D3235AE00AFEF44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BD2DA7F1D32386500AFEF44 /* TriLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriLabelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				8BD2DA681D3235AE00AFEF44 /* TriLabelView.h */,
 				8BD2DA6A1D3235AE00AFEF44 /* Info.plist */,
+				8BD2DA7F1D32386500AFEF44 /* TriLabelView.swift */,
 			);
 			path = TriLabelView;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD2DA801D32386500AFEF44 /* TriLabelView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +314,7 @@
 		8BD2DA7A1D3235AE00AFEF44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -320,12 +325,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mukeshthawani.TriLabelView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		8BD2DA7B1D3235AE00AFEF44 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
