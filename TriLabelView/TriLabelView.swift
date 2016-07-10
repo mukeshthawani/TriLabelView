@@ -10,9 +10,8 @@ import Foundation
 
 @IBDesignable class TriLabelView: UIView {
     
-    let secondLabel = UILabel()
-    var length = CGFloat()
-    var viewSize = CGFloat()
+    private var length = CGFloat()
+    private var viewSize = CGFloat()
     
     var position:Position = .TopLeft
     
@@ -80,6 +79,18 @@ import Foundation
     
     
     private func addSecondLabelView() {
+        let (x, y, labelAngle) = getLabelPostion(viewSize, length: length)
+        let firstLabel = UILabel()
+        firstLabel.frame = CGRectMake(x, y, length, 0.3*length)
+        firstLabel.text = firstLabelText
+        firstLabel.transform = CGAffineTransformMakeRotation(labelAngle)
+        //        firstLabel.backgroundColor = UIColor.brownColor()
+        firstLabel.textAlignment = .Center
+        firstLabel.changeFont(fontSize)
+        self.addSubview(firstLabel)
+    }
+    
+    private func getLabelPostion(viewSize:CGFloat, length:CGFloat) -> (CGFloat,CGFloat,CGFloat) {
         var x = CGFloat()
         var y = CGFloat()
         var labelAngle:CGFloat = 0
@@ -101,14 +112,7 @@ import Foundation
             y = 0.2*length
             labelAngle = (7*(3.14/4))
         }
-        let firstLabel = UILabel()
-        firstLabel.frame = CGRectMake(x, y, length, 0.3*length)
-        firstLabel.text = firstLabelText
-        firstLabel.transform = CGAffineTransformMakeRotation(labelAngle)
-        //        firstLabel.backgroundColor = UIColor.brownColor()
-        firstLabel.textAlignment = .Center
-        firstLabel.changeFont(fontSize)
-        self.addSubview(firstLabel)
+        return(x,y,labelAngle)
     }
     
 }
