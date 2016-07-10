@@ -14,9 +14,17 @@ import Foundation
     var length = CGFloat()
     var viewSize = CGFloat()
     
-    @IBInspectable var position: Position = .TopLeft {
+    var position:Position = .TopLeft
+    
+    @available(*, unavailable, message="This property is reserved for IB. Use position instead")
+    @IBInspectable var positionName: String? {
         didSet {
             setNeedsDisplay()
+        }
+        willSet {
+            if let newPosition = Position(rawValue: newValue?.lowercaseString ?? "") {
+                position = newPosition
+            }
         }
     }
     
@@ -90,18 +98,18 @@ import Foundation
         firstLabel.frame = CGRectMake(x, y, length, 0.3*length)
         firstLabel.text = firstLabelText
         firstLabel.transform = CGAffineTransformMakeRotation(3*(3.14/2) + (3.14/4))
-        firstLabel.backgroundColor = UIColor.brownColor()
+        //        firstLabel.backgroundColor = UIColor.brownColor()
         firstLabel.changeFont(fontSize)
         self.addSubview(firstLabel)
     }
     
 }
 
-enum Position {
-    case TopLeft
-    case TopRight
-    case BottomRight
-    case BottomLeft
+enum Position:String {
+    case TopLeft = "topleft"
+    case TopRight = "topright"
+    case BottomRight = "bottomright"
+    case BottomLeft = "bottomleft"
 }
 
 extension UILabel {
