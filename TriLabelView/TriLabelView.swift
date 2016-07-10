@@ -37,6 +37,9 @@ import Foundation
     
     @IBInspectable var fontSize:CGFloat = 20
     
+    @IBInspectable var viewColor:UIColor = UIColor.blueColor()
+    
+    @IBInspectable var textColot:UIColor = UIColor.blackColor()
     
     override func drawRect(rect: CGRect) {
         let trianglePath = UIBezierPath()
@@ -66,17 +69,6 @@ import Foundation
         trianglePath.stroke()
         addSecondLabelView()
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSecondLabelView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        addSecondLabelView()
-    }
-    
     
     private func addSecondLabelView() {
         let (x, y, labelAngle) = getLabelPostion(viewSize, length: length)
