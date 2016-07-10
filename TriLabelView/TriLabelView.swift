@@ -71,7 +71,7 @@ import Foundation
         trianglePath.addLineToPoint(CGPoint(x: pointValues[4], y: pointValues[5]))
         trianglePath.addLineToPoint(CGPoint(x: pointValues[6], y: pointValues[7]))
         trianglePath.closePath()
-        UIColor.blackColor().setStroke()
+        UIColor.clearColor().setStroke()
         viewColor.setFill()
         trianglePath.fill()
         trianglePath.stroke()
@@ -97,15 +97,15 @@ import Foundation
         switch position {
         case .TopRight:
             x = (viewSize - (0.8*length))
-            y = 0.2*length
+            y = 0.15*length
             labelAngle = (3.14/4)
         case .BottomRight:
             x = (viewSize - (0.8*length))
-            y = (viewSize - (0.5*length))
+            y = (viewSize - (0.6*length))
             labelAngle = (-3.14/4)
         case .BottomLeft:
-            x = (-0.2*length)
-            y = (viewSize - (0.5*length))
+            x = 0
+            y = (viewSize - (0.6*length))
             labelAngle = (3.14/4)
         default:
             x = (-0.05*length)
