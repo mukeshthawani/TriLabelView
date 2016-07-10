@@ -37,9 +37,17 @@ import Foundation
     
     @IBInspectable var fontSize:CGFloat = 20
     
-    @IBInspectable var viewColor:UIColor = UIColor.blueColor()
+    @IBInspectable var viewColor:UIColor = UIColor.blueColor() {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
-    @IBInspectable var textColot:UIColor = UIColor.blackColor()
+    @IBInspectable var textColor:UIColor = UIColor.blackColor() {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     override func drawRect(rect: CGRect) {
         let trianglePath = UIBezierPath()
@@ -64,7 +72,7 @@ import Foundation
         trianglePath.addLineToPoint(CGPoint(x: pointValues[6], y: pointValues[7]))
         trianglePath.closePath()
         UIColor.blackColor().setStroke()
-        UIColor.blueColor().setFill()
+        viewColor.setFill()
         trianglePath.fill()
         trianglePath.stroke()
         addSecondLabelView()
@@ -73,11 +81,11 @@ import Foundation
     private func addSecondLabelView() {
         let (x, y, labelAngle) = getLabelPostion(viewSize, length: length)
         let firstLabel = UILabel()
-        firstLabel.frame = CGRectMake(x, y, length, 0.3*length)
+        firstLabel.frame = CGRectMake(x, y, length*0.8, 0.4*length)
         firstLabel.text = firstLabelText
         firstLabel.transform = CGAffineTransformMakeRotation(labelAngle)
-        //        firstLabel.backgroundColor = UIColor.brownColor()
         firstLabel.textAlignment = .Center
+        firstLabel.textColor = textColor
         firstLabel.changeFont(fontSize)
         self.addSubview(firstLabel)
     }
@@ -100,8 +108,8 @@ import Foundation
             y = (viewSize - (0.5*length))
             labelAngle = (3.14/4)
         default:
-            x = (-0.2*length)
-            y = 0.2*length
+            x = (-0.05*length)
+            y = 0.15*length
             labelAngle = (7*(3.14/4))
         }
         return(x,y,labelAngle)
