@@ -28,6 +28,8 @@ import Foundation
     
     @IBInspectable var firstLabelText:String = "Hi"
     
+    @IBInspectable var fontSize:CGFloat = 20
+    
     
     override func drawRect(rect: CGRect) {
         let trianglePath = UIBezierPath()
@@ -53,7 +55,6 @@ import Foundation
         trianglePath.closePath()
         UIColor.blackColor().setStroke()
         UIColor.blueColor().setFill()
-        trianglePath.lineWidth = 3
         trianglePath.fill()
         trianglePath.stroke()
         addSecondLabelView()
@@ -88,10 +89,11 @@ import Foundation
             y = 0.1 * length
         }
         let firstLabel = UILabel()
-        firstLabel.frame = CGRectMake(x, y, length, 20)
+        firstLabel.frame = CGRectMake(x, y, length, 0.3*length)
         firstLabel.text = firstLabelText
         firstLabel.transform = CGAffineTransformMakeRotation(3*(3.14/2) + (3.14/4))
         firstLabel.backgroundColor = UIColor.brownColor()
+        firstLabel.changeFont(fontSize)
         self.addSubview(firstLabel)
     }
     
@@ -102,4 +104,11 @@ enum Position {
     case TopRight
     case BottomRight
     case BottomLeft
+}
+
+extension UILabel {
+    func changeFont(fontSize:CGFloat) {
+        font = UIFont(name: "HelveticaNeue-Bold", size: fontSize)
+        adjustsFontSizeToFitWidth = true
+    }
 }
