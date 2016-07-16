@@ -8,7 +8,7 @@
 
 import Foundation
 
-@IBDesignable class TriLabelView: UIView {
+@IBDesignable public class TriLabelView: UIView {
     
     private var length = CGFloat()
     private var viewSize = CGFloat()
@@ -16,7 +16,7 @@ import Foundation
     var position:Position = .TopLeft
     
     @available(*, unavailable, message="This property is reserved for IB. Use position instead")
-    @IBInspectable var positionName: String? {
+    @IBInspectable public var positionName: String? {
         didSet {
             setNeedsDisplay()
         }
@@ -27,29 +27,39 @@ import Foundation
         }
     }
     
-    @IBInspectable var lengthPercentage:CGFloat = 50 {
+    @IBInspectable public var lengthPercentage:CGFloat = 50 {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    @IBInspectable var firstLabelText:String = "Hi"
+    @IBInspectable public var labelText:String = "Hi"
     
-    @IBInspectable var fontSize:CGFloat = 20
+    @IBInspectable public var fontSize:CGFloat = 20
     
-    @IBInspectable var viewColor:UIColor = UIColor.blueColor() {
+    @IBInspectable public var viewColor:UIColor = UIColor.blueColor() {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    @IBInspectable var textColor:UIColor = UIColor.blackColor() {
+    @IBInspectable public var textColor:UIColor = UIColor.blackColor() {
         didSet {
             setNeedsDisplay()
         }
     }
     
-    override func drawRect(rect: CGRect) {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setNeedsDisplay()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setNeedsDisplay()
+    }
+    
+    override public func drawRect(rect: CGRect) {
         let trianglePath = UIBezierPath()
         var pointValues = [CGFloat]()
         length = (lengthPercentage/100)*min(bounds.width, bounds.height)
@@ -82,7 +92,7 @@ import Foundation
         let (x, y, labelAngle) = getLabelPostion(viewSize, length: length)
         let firstLabel = UILabel()
         firstLabel.frame = CGRectMake(x, y, length*0.8, 0.4*length)
-        firstLabel.text = firstLabelText
+        firstLabel.text = labelText
         firstLabel.transform = CGAffineTransformMakeRotation(labelAngle)
         firstLabel.textAlignment = .Center
         firstLabel.textColor = textColor
