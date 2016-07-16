@@ -51,12 +51,16 @@ import Foundation
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setNeedsDisplay()
+        setUp()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setNeedsDisplay()
+        setUp()
+    }
+    
+    func setUp() {
+        self.opaque = false
     }
     
     override public func drawRect(rect: CGRect) {
