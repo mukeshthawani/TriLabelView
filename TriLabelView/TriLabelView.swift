@@ -11,8 +11,14 @@ import Foundation
 @IBDesignable public class TriLabelView: UIView {
     
     private var length = CGFloat()
-    private var viewSize = CGFloat()
-    public var position:Position = .TopLeft
+    private var originalFrameValue = CGRect()
+    
+    public var position:Position = .TopLeft {
+        didSet {
+            updateFrameValue()
+            setNeedsDisplay()
+        }
+    }
     
     @available(*, unavailable, message="This property is reserved for IB. Use position instead")
     @IBInspectable public var positionName: String? {
@@ -60,23 +66,37 @@ import Foundation
     
     func setUp() {
         self.opaque = false
+        originalFrameValue = self.frame
+        updateFrameValue()
+    }
+    
+    func updateFrameValue() {
+        length = (lengthPercentage/100)*min(originalFrameValue.width, originalFrameValue.height)
+        switch position {
+        case .TopRight:
+            frame = CGRectMake(originalFrameValue.width-length, 0, length, length)
+        case .BottomLeft:
+            frame = CGRectMake(0, originalFrameValue.height-length, length, length)
+        case .BottomRight:
+            frame = CGRectMake(originalFrameValue.width-length, originalFrameValue.height-length, length, length)
+        default:
+            frame = CGRectMake(0, 0, length, length)
+        }
     }
     
     override public func drawRect(rect: CGRect) {
         let trianglePath = UIBezierPath()
         var pointValues = [CGFloat]()
-        length = (lengthPercentage/100)*min(bounds.width, bounds.height)
-        viewSize = min(bounds.width, bounds.height)
         switch position {
         case .TopRight:
-            pointValues = [viewSize, 0, viewSize, length, viewSize - length, 0, viewSize, 0]
+            pointValues = [frame.width, 0, frame.width, frame.width, 0, 0, frame.width, 0]
         case .BottomLeft:
-            pointValues = [0, viewSize, 0, viewSize - length, length, viewSize, 0, viewSize]
+            pointValues = [0, frame.width, 0, 0, frame.width, frame.width, 0, frame.width]
         case .BottomRight:
-            pointValues = [viewSize, viewSize, viewSize, viewSize - length, viewSize - length, viewSize, viewSize, viewSize]
+            pointValues = [frame.width, frame.width, frame.width, 0, 0, frame.width, frame.width, frame.width]
         default:
             // Default is TopLeft
-            pointValues = [0, 0, 0, length, length, 0, 0, 0]
+            pointValues = [0, 0, 0, frame.width, frame.width, 0, 0, 0]
             
         }
         trianglePath.moveToPoint(CGPoint(x: pointValues[0], y: pointValues[1]))
@@ -92,7 +112,7 @@ import Foundation
     }
     
     private func addSecondLabelView() {
-        let (x, y, labelAngle) = getLabelPostion(viewSize, length: length)
+        let (x, y, labelAngle) = getLabelPostion(frame.width)
         let firstLabel = UILabel()
         firstLabel.frame = CGRectMake(x, y, length*0.8, 0.4*length)
         firstLabel.text = labelText
@@ -103,22 +123,22 @@ import Foundation
         self.addSubview(firstLabel)
     }
     
-    private func getLabelPostion(viewSize:CGFloat, length:CGFloat) -> (CGFloat,CGFloat,CGFloat) {
+    private func getLabelPostion(length:CGFloat) -> (CGFloat,CGFloat,CGFloat) {
         var x = CGFloat()
         var y = CGFloat()
         var labelAngle:CGFloat = 0
         switch position {
         case .TopRight:
-            x = (viewSize - (0.8*length))
+            x = (0.2*length)
             y = 0.15*length
             labelAngle = (3.14/4)
         case .BottomRight:
-            x = (viewSize - (0.8*length))
-            y = (viewSize - (0.6*length))
+            x = (0.2*length)
+            y = (0.4*length)
             labelAngle = (-3.14/4)
         case .BottomLeft:
             x = 0
-            y = (viewSize - (0.6*length))
+            y = (0.4*length)
             labelAngle = (3.14/4)
         default:
             x = (-0.05*length)
