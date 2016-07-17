@@ -12,8 +12,7 @@ import Foundation
     
     private var length = CGFloat()
     private var viewSize = CGFloat()
-    
-    var position:Position = .TopLeft
+    public var position:Position = .TopLeft
     
     @available(*, unavailable, message="This property is reserved for IB. Use position instead")
     @IBInspectable public var positionName: String? {
@@ -131,7 +130,7 @@ import Foundation
     
 }
 
-enum Position:String {
+public enum Position:String {
     case TopLeft = "topleft"
     case TopRight = "topright"
     case BottomRight = "bottomright"
