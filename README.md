@@ -21,7 +21,7 @@ and run `pod install`.
 
 ##Usage
 
-### Creating a view from the
+### Creating a view from the code
 
 ```Swift
 let triLabelView = TriLabelView(frame:CGRect)
