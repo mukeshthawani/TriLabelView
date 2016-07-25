@@ -27,3 +27,25 @@ and run `pod install`.
 let triLabelView = TriLabelView(frame:CGRect)
 view.addSubview(triLabelView)
 ```
+
+#### Customization
+```Swift
+// Change Text
+triLabelView.text = "NEW"
+
+// Adjust Length Percentage
+// You can update this to set percentage value of this
+// view to that of the superview.
+// Default value is 50.0
+triLabelView.lengthPercentage = 60.0
+```
+
+You can set the position of view with `.TopLeft` being the default. The following positions are available
+```Swift
+public enum Position:String {
+    case TopLeft
+    case TopRight
+    case BottomRight
+    case BottomLeft
+}
+```
