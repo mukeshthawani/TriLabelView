@@ -12,17 +12,17 @@ import TriLabelView
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    private var colorList:[UIColor] = [.cyanColor(),.magentaColor(),.purpleColor(),.grayColor()]
+    private var colorList:[UIColor] = [.cyanColor(),.magentaColor(),.purpleColor(),.grayColor(), .greenColor(), .blueColor()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = UIColor.blackColor()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     func collectionView(collectionView: UICollectionView,
@@ -46,16 +46,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         triLabel.labelText = "NEW"
         triLabel.viewColor = UIColor.orangeColor()
         switch indexPath.row {
+        case 0:
+            cell.addSubview(triLabel)
         case 1:
             triLabel.position = .TopRight
+            cell.addSubview(triLabel)
         case 2:
             triLabel.position = .BottomLeft
+            cell.addSubview(triLabel)
         case 3:
             triLabel.position = .BottomRight
+            cell.addSubview(triLabel)
         default:
-            triLabel.position = .TopLeft
+            break
         }
-        cell.addSubview(triLabel)
         cell.backgroundColor = colorList[indexPath.row]
         return cell
     }
