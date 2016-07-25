@@ -8,7 +8,11 @@
 <br>
 <br>
 
-<img src='graphics/main_scr.png' width='500' alt='TriLabelView'>
+<img
+src='graphics/ScreenShotOne.png' width='320' alt='TriLabelView'>
+<img
+src='graphics/ScreenShotTwo.png' width='320'
+alt='TriLabelView'> 
 
 ## Setup with Cocoapods
 
