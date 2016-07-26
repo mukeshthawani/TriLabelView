@@ -42,12 +42,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath)
+        
+        // Initialize
         let triLabel = TriLabelView(frame: cell.bounds)
+        
+        // Length Percentage
+        triLabel.lengthPercentage = 50
+        
+        // Text
         triLabel.labelText = "NEW"
+        
+        // Text Color
         triLabel.textColor = UIColor.whiteColor()
+        
+        // Font Size
+        triLabel.fontSize = 19
+        
+        // Background Color
         triLabel.viewColor = UIColor.brownColor()
+        
         switch indexPath.row {
         case 0:
+            
+            // Add view
             cell.addSubview(triLabel)
         case 1:
             triLabel.position = .TopRight
