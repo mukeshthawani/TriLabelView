@@ -53,3 +53,12 @@ public enum Position:String {
     case BottomLeft
 }
 ```
+
+You can update text color, font size and background color
+```Swift
+triLabelView.textColor = UIColor.yellowColor()
+
+triLabelView.fontSize = 15
+
+triLabelView.viewColor = UIColor.brownColor()
+```
