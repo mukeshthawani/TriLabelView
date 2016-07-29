@@ -113,41 +113,55 @@ import Foundation
     }
     
     private func addSecondLabelView() {
-        let (x, y, labelAngle) = getLabelPostion(frame.width)
+        let (x, y, labelAngle,textWidth,textHeight) = getLabelPostion(frame.width)
         let firstLabel = UILabel()
-        firstLabel.frame = CGRectMake(x, y, length*0.8, 0.4*length)
+        firstLabel.frame = CGRectMake(x, y, textWidth, textHeight)
         firstLabel.text = labelText
         firstLabel.transform = CGAffineTransformMakeRotation(labelAngle)
         firstLabel.textAlignment = .Center
         firstLabel.textColor = textColor
         firstLabel.changeFont(fontSize)
         self.addSubview(firstLabel)
+        
     }
     
-    private func getLabelPostion(length:CGFloat) -> (CGFloat,CGFloat,CGFloat) {
+    private func getLabelPostion(length:CGFloat) -> (CGFloat,CGFloat,CGFloat,CGFloat,CGFloat) {
         var x = CGFloat()
         var y = CGFloat()
         var labelAngle:CGFloat = 0
+        
+        let (textWidth,textHeight) = getTextCGSize(labelText)
+        
         switch position {
         case .TopRight:
-            x = (0.2*length)
-            y = 0.15*length
+            x = 2/3*length-textWidth/2
+            y = 1/3*length-textHeight/2
             labelAngle = (3.14/4)
         case .BottomRight:
-            x = (0.2*length)
-            y = (0.4*length)
+            x = 2/3*length-textWidth/2
+            y = 2/3*length-textHeight/2
             labelAngle = (-3.14/4)
         case .BottomLeft:
-            x = 0
-            y = (0.4*length)
+            x = 1/3*length - textWidth/2
+            y = 2/3*length-textHeight/2
             labelAngle = (3.14/4)
         default:
-            x = (-0.05*length)
-            y = 0.15*length
+            x = 1/3*length - textWidth/2
+            y = 1/3*length - textHeight/2
             labelAngle = (7*(3.14/4))
         }
-        return(x,y,labelAngle)
+        return(x,y,labelAngle,textWidth,textHeight)
     }
+    
+    func getTextCGSize(text:String) -> (CGFloat,CGFloat) {
+        let uiFont:UIFont = UIFont.init(name: "HelveticaNeue-Bold", size: fontSize)!
+        let textAttr = [NSFontAttributeName:uiFont]
+        let nsText = text as NSString
+        
+        let cgSize = nsText.sizeWithAttributes(textAttr)
+        return (cgSize.width,cgSize.height)
+    }
+
     
 }
 
