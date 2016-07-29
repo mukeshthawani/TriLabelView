@@ -34,6 +34,7 @@ import Foundation
     
     @IBInspectable public var lengthPercentage:CGFloat = 50 {
         didSet {
+            updateFrameValue()
             setNeedsDisplay()
         }
     }
