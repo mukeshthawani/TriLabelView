@@ -39,7 +39,11 @@ import Foundation
         }
     }
     
-    @IBInspectable public var labelText:String = "Hi"
+    @IBInspectable public var labelText:String = "Hi" {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     @IBInspectable public var fontSize:CGFloat = 20
     
@@ -113,6 +117,7 @@ import Foundation
     }
     
     private func addSecondLabelView() {
+        clearChildViews()
         let (x, y, labelAngle,textWidth,textHeight) = getLabelPostion(frame.width)
         let firstLabel = UILabel()
         firstLabel.frame = CGRectMake(x, y, textWidth, textHeight)
@@ -124,6 +129,10 @@ import Foundation
         self.addSubview(firstLabel)
         
     }
+    private func clearChildViews(){
+        self.subviews.forEach({ $0.removeFromSuperview() })
+    }
+
     
     private func getLabelPostion(length:CGFloat) -> (CGFloat,CGFloat,CGFloat,CGFloat,CGFloat) {
         var x = CGFloat()
