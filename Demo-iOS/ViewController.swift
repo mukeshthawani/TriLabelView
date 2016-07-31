@@ -18,6 +18,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.registerClass(CustomCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.backgroundColor = UIColor.whiteColor()
     }
     
@@ -41,41 +42,35 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath)
-        
-        // Initialize
-        let triLabel = TriLabelView(frame: cell.bounds)
-        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CustomCell
+        let cellTriLabel = cell.triLabel
+
         // Length Percentage
-        triLabel.lengthPercentage = 50
+        cellTriLabel.lengthPercentage = 50
         
         // Text
-        triLabel.labelText = "NEW"
+        cellTriLabel.labelText = "NEW"
         
         // Text Color
-        triLabel.textColor = UIColor.whiteColor()
+        cellTriLabel.textColor = UIColor.whiteColor()
         
         // Font Size
-        triLabel.fontSize = 19
+        cellTriLabel.fontSize = 19
         
         // Background Color
-        triLabel.viewColor = UIColor.brownColor()
+        cellTriLabel.viewColor = UIColor.brownColor()
         
         switch indexPath.row {
         case 0:
-            
-            // Add view
-            cell.addSubview(triLabel)
+          cellTriLabel.position = .TopLeft
         case 1:
-            triLabel.position = .TopRight
-            cell.addSubview(triLabel)
+            cellTriLabel.position = .TopRight
         case 2:
-            triLabel.position = .BottomLeft
-            cell.addSubview(triLabel)
+            cellTriLabel.position = .BottomLeft
         case 3:
-            triLabel.position = .BottomRight
-            cell.addSubview(triLabel)
+            cellTriLabel.position = .BottomRight
         default:
+            cellTriLabel.hidden = true
             break
         }
         cell.backgroundColor = colorList[indexPath.row]
