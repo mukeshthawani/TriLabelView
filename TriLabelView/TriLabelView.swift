@@ -106,7 +106,6 @@ import Foundation
       // Default is TopLeft
       pointValues = [rectOriginX, rectOriginY, rectWidth, rectOriginY, rectOriginX, rectHeight, rectOriginX, rectOriginY]
     }
-    print(pointValues)
     trianglePath.moveToPoint(CGPoint(x: pointValues[0], y: pointValues[1]))
     trianglePath.addLineToPoint(CGPoint(x: pointValues[2], y: pointValues[3]))
     trianglePath.addLineToPoint(CGPoint(x: pointValues[4], y: pointValues[5]))
