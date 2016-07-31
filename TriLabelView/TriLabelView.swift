@@ -11,11 +11,10 @@ import Foundation
 @IBDesignable public class TriLabelView: UIView {
   
   private var length = CGFloat()
-  private var originalFrameValue = CGRect()
+  private var newRect = CGRect()
   
   public var position:Position = .TopLeft {
     didSet {
-      updateFrameValue()
       setNeedsDisplay()
     }
   }
@@ -34,7 +33,6 @@ import Foundation
   
   @IBInspectable public var lengthPercentage:CGFloat = 50 {
     didSet {
-      updateFrameValue()
       setNeedsDisplay()
     }
   }
@@ -71,39 +69,44 @@ import Foundation
   
   func setUp() {
     self.opaque = false
-    originalFrameValue = self.frame
-    updateFrameValue()
   }
   
-  func updateFrameValue() {
-    length = (lengthPercentage/100)*min(originalFrameValue.width, originalFrameValue.height)
+  func updateNewRect() {
+    let rectWidth = bounds.width
+    let rectHeight = bounds.height
+    length = (lengthPercentage/100)*min(rectWidth, rectHeight)
     switch position {
     case .TopRight:
-      frame = CGRectMake(originalFrameValue.width-length, 0, length, length)
+      newRect = CGRectMake(rectWidth-length, 0, length, length)
     case .BottomLeft:
-      frame = CGRectMake(0, originalFrameValue.height-length, length, length)
+      newRect = CGRectMake(0, rectHeight-length, length, length)
     case .BottomRight:
-      frame = CGRectMake(originalFrameValue.width-length, originalFrameValue.height-length, length, length)
+      newRect = CGRectMake(rectWidth-length, rectHeight-length, length, length)
     default:
-      frame = CGRectMake(0, 0, length, length)
+      newRect = CGRectMake(0, 0, length, length)
     }
   }
   
   override public func drawRect(rect: CGRect) {
+    updateNewRect()
     let trianglePath = UIBezierPath()
     var pointValues = [CGFloat]()
+    let rectOriginX = newRect.origin.x
+    let rectOriginY = newRect.origin.y
+    let rectWidth = newRect.width + rectOriginX
+    let rectHeight = newRect.width + rectOriginY
     switch position {
     case .TopRight:
-      pointValues = [frame.width, 0, frame.width, frame.width, 0, 0, frame.width, 0]
+      pointValues = [rectOriginX,rectOriginY, rectWidth, rectOriginY, rectWidth, rectHeight, rectOriginX, rectOriginY]
     case .BottomLeft:
-      pointValues = [0, frame.width, 0, 0, frame.width, frame.width, 0, frame.width]
+      pointValues = [rectOriginX, rectOriginY, rectWidth, rectHeight, rectOriginX, rectHeight, rectOriginX, rectOriginY]
     case .BottomRight:
-      pointValues = [frame.width, frame.width, frame.width, 0, 0, frame.width, frame.width, frame.width]
+      pointValues = [rectWidth, rectOriginY, rectWidth, rectHeight, rectOriginX, rectHeight, rectWidth, rectOriginY]
     default:
       // Default is TopLeft
-      pointValues = [0, 0, 0, frame.width, frame.width, 0, 0, 0]
-      
+      pointValues = [rectOriginX, rectOriginY, rectWidth, rectOriginY, rectOriginX, rectHeight, rectOriginX, rectOriginY]
     }
+    print(pointValues)
     trianglePath.moveToPoint(CGPoint(x: pointValues[0], y: pointValues[1]))
     trianglePath.addLineToPoint(CGPoint(x: pointValues[2], y: pointValues[3]))
     trianglePath.addLineToPoint(CGPoint(x: pointValues[4], y: pointValues[5]))
@@ -118,7 +121,7 @@ import Foundation
   
   private func addSecondLabelView() {
     self.clearChildViews()
-    let (x, y, labelAngle,textWidth,textHeight) = getLabelPostion(frame.width)
+    let (x, y, labelAngle,textWidth,textHeight) = getLabelPostion(newRect.width)
     let firstLabel = UILabel()
     firstLabel.frame = CGRectMake(x, y, textWidth, textHeight)
     firstLabel.text = labelText
@@ -127,32 +130,33 @@ import Foundation
     firstLabel.textColor = textColor
     firstLabel.changeFont(fontSize)
     self.addSubview(firstLabel)
-    
   }
   
   private func getLabelPostion(length:CGFloat) -> (CGFloat,CGFloat,CGFloat,CGFloat,CGFloat) {
     var x = CGFloat()
     var y = CGFloat()
     var labelAngle:CGFloat = 0
-    
+    let rectOriginX = newRect.origin.x
+    let rectOriginY = newRect.origin.y
+    let rectWidth = newRect.width
     let (textWidth,textHeight) = getTextCGSize(labelText)
     
     switch position {
     case .TopRight:
-      x = 2/3*length-textWidth/2
-      y = 1/3*length-textHeight/2
+      x = (2/3*rectWidth+rectOriginX)-textWidth/2
+      y = (1/3*rectWidth+rectOriginY)-textHeight/2
       labelAngle = (3.14/4)
     case .BottomRight:
-      x = 2/3*length-textWidth/2
-      y = 2/3*length-textHeight/2
+      x = (2/3*rectWidth+rectOriginX)-textWidth/2
+      y = (2/3*rectWidth+rectOriginY)-textHeight/2
       labelAngle = (-3.14/4)
     case .BottomLeft:
-      x = 1/3*length - textWidth/2
-      y = 2/3*length-textHeight/2
+      x = (1/3*rectWidth+rectOriginX)-textWidth/2
+      y = (2/3*rectWidth+rectOriginY)-textHeight/2
       labelAngle = (3.14/4)
     default:
-      x = 1/3*length - textWidth/2
-      y = 1/3*length - textHeight/2
+      x = (1/3*rectWidth+rectOriginX) - textWidth/2
+      y = (1/3*rectWidth+rectOriginY) - textHeight/2
       labelAngle = (7*(3.14/4))
     }
     return(x,y,labelAngle,textWidth,textHeight)
@@ -162,11 +166,9 @@ import Foundation
     let uiFont:UIFont = UIFont.init(name: "HelveticaNeue-Bold", size: fontSize)!
     let textAttr = [NSFontAttributeName:uiFont]
     let nsText = text as NSString
-    
     let cgSize = nsText.sizeWithAttributes(textAttr)
     return (cgSize.width,cgSize.height)
   }
-  
   
 }
 
