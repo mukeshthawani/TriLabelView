@@ -75,3 +75,7 @@ triLabelView.viewColor = UIColor.brownColor()
 ## Contributing
 
 Feature requests, bug reports, and pull requests are all welcome.
+
+## License
+
+Copyright (c) 2016 Mukesh Thawani. Release under the [MIT License](License).
