@@ -62,3 +62,16 @@ triLabelView.fontSize = 15
 
 triLabelView.viewColor = UIColor.brownColor()
 ```
+
+## Requirements
+
+- Swift 2.2 / Xcode 7.3
+- iOS 9.3
+
+## Author
+
+[Mukesh Thawani](http://twitter.com/MukeshThawani)
+
+## Contributing
+
+Feature requests, bug reports, and pull requests are all welcome.
