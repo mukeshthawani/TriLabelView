@@ -9,9 +9,9 @@
 <br>
 
 <img
-src='graphics/screen_shot_one.png' width='320' alt='TriLabelView'>
+src='graphics/example_fir.png' width='320' alt='TriLabelView'>
 <img
-src='graphics/screen_shot_two.png' width='320'
+src='graphics/example_sec.png' width='320'
 alt='TriLabelView'>
 
 ## Setup with Cocoapods
