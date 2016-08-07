@@ -6,19 +6,27 @@
 //  Copyright © 2016 Mukesh Thawani. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
+/**
+ 
+ TriLabelView for iOS.
+ Project home: "https://github.com/mukeshthawani/TriLabelView"
+ 
+ */
 @IBDesignable public class TriLabelView: UIView {
   
   private var length = CGFloat()
   private var newRect = CGRect()
   
+  /// The position of the label view.
   public var position:Position = .TopLeft {
     didSet {
       setNeedsDisplay()
     }
   }
   
+  /// The postion of the label view for IB.
   @available(*, unavailable, message="This property is reserved for IB. Use position instead")
   @IBInspectable public var positionName: String? {
     didSet {
@@ -31,26 +39,31 @@ import Foundation
     }
   }
   
+  /// Percentage of length of the label view to parent view.
   @IBInspectable public var lengthPercentage:CGFloat = 50 {
     didSet {
       setNeedsDisplay()
     }
   }
   
+  /// The text displayed by the label view.
   @IBInspectable public var labelText:String = "Hi" {
     didSet {
       setNeedsDisplay()
     }
   }
   
+  /// The font size of the text.
   @IBInspectable public var fontSize:CGFloat = 20
   
+  /// The background color of the label view.
   @IBInspectable public var viewColor:UIColor = UIColor.blueColor() {
     didSet {
       setNeedsDisplay()
     }
   }
   
+  /// The color of the text.
   @IBInspectable public var textColor:UIColor = UIColor.blackColor() {
     didSet {
       setNeedsDisplay()
@@ -67,11 +80,12 @@ import Foundation
     setUp()
   }
   
-  func setUp() {
+  private func setUp() {
     self.opaque = false
   }
   
-  func updateNewRect() {
+  /// Create a new rectangle according to the position.
+  private func updateNewRect() {
     let rectWidth = bounds.width
     let rectHeight = bounds.height
     length = (lengthPercentage/100)*min(rectWidth, rectHeight)
@@ -115,10 +129,11 @@ import Foundation
     viewColor.setFill()
     trianglePath.fill()
     trianglePath.stroke()
-    addSecondLabelView()
+    addLabelToView()
   }
   
-  private func addSecondLabelView() {
+  /// Add the label to the label view.
+  private func addLabelToView() {
     self.clearChildViews()
     let (x, y, labelAngle,textWidth,textHeight) = getLabelPostion(newRect.width)
     let firstLabel = UILabel()
@@ -131,6 +146,7 @@ import Foundation
     self.addSubview(firstLabel)
   }
   
+  /// Get the position of the label inside the label view.
   private func getLabelPostion(length:CGFloat) -> (CGFloat,CGFloat,CGFloat,CGFloat,CGFloat) {
     var x = CGFloat()
     var y = CGFloat()
@@ -161,7 +177,8 @@ import Foundation
     return(x,y,labelAngle,textWidth,textHeight)
   }
   
-  func getTextCGSize(text:String) -> (CGFloat,CGFloat) {
+  /// Get the width and height of the text.
+  private func getTextCGSize(text:String) -> (CGFloat,CGFloat) {
     let uiFont:UIFont = UIFont.init(name: "HelveticaNeue-Bold", size: fontSize)!
     let textAttr = [NSFontAttributeName:uiFont]
     let nsText = text as NSString
@@ -171,6 +188,7 @@ import Foundation
   
 }
 
+/// The positions to select for placement of the label view
 public enum Position:String {
   case TopLeft = "topleft"
   case TopRight = "topright"
@@ -178,13 +196,15 @@ public enum Position:String {
   case BottomLeft = "bottomleft"
 }
 
-extension UIView {
+/// Clear the child views.
+private extension UIView {
   func clearChildViews(){
     subviews.forEach({ $0.removeFromSuperview() })
   }
 }
 
-extension UILabel {
+/// Update the font of the text and fit it's width.
+private extension UILabel {
   func changeFont(fontSize:CGFloat) {
     font = UIFont(name: "HelveticaNeue-Bold", size: fontSize)
     adjustsFontSizeToFitWidth = true
