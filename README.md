@@ -67,7 +67,7 @@ triLabelView.fontSize = 15
 triLabelView.viewColor = UIColor.brownColor()
 ```
 
-## Creating a view from the storyboard
+### Creating a view from the storyboard
 
 - If you already have a view where you want to use then set it's `class` to `TriLabelView` in identity inspector.
 
