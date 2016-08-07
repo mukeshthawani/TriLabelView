@@ -9,9 +9,9 @@
 <br>
 
 <img
-src='graphics/example_fir.png' width='450' alt='TriLabelView'>
+src='https://raw.githubusercontent.com/mukeshthawani/TriLabelView/master/graphics/first_example.png' width='450' alt='TriLabelView'>
 <img
-src='graphics/example_sec.png' width='450' alt='TriLabelView'>
+src='https://raw.githubusercontent.com/mukeshthawani/TriLabelView/master/graphics/second_example.png' width='450' alt='TriLabelView'>
 
 ## Setup with Cocoapods
 
@@ -22,7 +22,12 @@ and run `pod install`.
     target 'Your target name'
     pod 'TriLabelView'
 
-##Usage
+## Or Add source
+
+Simply add
+[TriLabelView.swift](https://github.com/mukeshthawani/TriLabelView/blob/master/TriLabelView/TriLabelView.swift) file to you project.
+
+## Usage
 
 ### Creating a view from the code
 
@@ -61,6 +66,22 @@ triLabelView.fontSize = 15
 
 triLabelView.viewColor = UIColor.brownColor()
 ```
+
+## Creating a view from the storyboard
+
+- If you already have a view where you want to use then set it's `class` to `TriLabelView` in identity inspector.
+
+- Or drag a **View** from object library and then change it's `class` to `TriLabelView` in identity inspector.
+
+- Set the `module` property to `TriLabelView`.
+
+<img
+src='https://raw.githubusercontent.com/mukeshthawani/TriLabelView/master/graphics/add_to_storyboard.png' width='260' alt='Add TriLabelView to storyboard'>
+
+- Customize the view properties in the attributes inspector.
+
+<img
+src='https://raw.githubusercontent.com/mukeshthawani/TriLabelView/master/graphics/attributes_inspector.png' width='360' alt='Attributes inspector'>
 
 ## Requirements
 
