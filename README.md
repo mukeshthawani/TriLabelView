@@ -13,9 +13,9 @@ src='https://raw.githubusercontent.com/mukeshthawani/TriLabelView/master/graphic
 <img
 src='https://raw.githubusercontent.com/mukeshthawani/TriLabelView/master/graphics/second_example.png' width='450' alt='TriLabelView'>
 
-## Setup with Cocoapods
+## Setup with CocoaPods
 
-If you are using Cocoapods add this text to your Podfile
+If you are using CocoaPods add this text to your Podfile
 and run `pod install`.
 
     use_frameworks!
