@@ -27,13 +27,13 @@ import UIKit
   }
   
   /// The postion of the label view for IB.
-  @available(*, unavailable, message="This property is reserved for IB. Use position instead")
+  @available(*, unavailable, message: "This property is reserved for IB. Use position instead")
   @IBInspectable public var positionName: String? {
     didSet {
       setNeedsDisplay()
     }
     willSet {
-      if let newPosition = Position(rawValue: newValue?.lowercaseString ?? "") {
+      if let newPosition = Position(rawValue: newValue?.lowercased() ?? "") {
         position = newPosition
       }
     }
@@ -57,14 +57,14 @@ import UIKit
   @IBInspectable public var fontSize:CGFloat = 20
   
   /// The background color of the label view.
-  @IBInspectable public var viewColor:UIColor = UIColor.blueColor() {
+  @IBInspectable public var viewColor:UIColor = UIColor.blue {
     didSet {
       setNeedsDisplay()
     }
   }
   
   /// The color of the text.
-  @IBInspectable public var textColor:UIColor = UIColor.blackColor() {
+  @IBInspectable public var textColor:UIColor = UIColor.black {
     didSet {
       setNeedsDisplay()
     }
@@ -81,7 +81,7 @@ import UIKit
   }
   
   private func setUp() {
-    self.opaque = false
+    self.isOpaque = false
   }
   
   /// Create a new rectangle according to the position.
@@ -91,17 +91,17 @@ import UIKit
     length = (lengthPercentage/100)*min(rectWidth, rectHeight)
     switch position {
     case .TopRight:
-      newRect = CGRectMake(rectWidth-length, 0, length, length)
+      newRect = CGRect(x: rectWidth-length, y: 0, width: length, height: length)
     case .BottomLeft:
-      newRect = CGRectMake(0, rectHeight-length, length, length)
+      newRect = CGRect(x: 0, y: rectHeight-length, width: length, height: length)
     case .BottomRight:
-      newRect = CGRectMake(rectWidth-length, rectHeight-length, length, length)
+      newRect = CGRect(x: rectWidth-length, y: rectHeight-length, width: length, height: length)
     default:
-      newRect = CGRectMake(0, 0, length, length)
+      newRect = CGRect(x: 0, y: 0, width: length, height: length)
     }
   }
   
-  override public func drawRect(rect: CGRect) {
+  override public func draw(_ rect: CGRect) {
     updateNewRect()
     let trianglePath = UIBezierPath()
     var pointValues = [CGFloat]()
@@ -120,12 +120,12 @@ import UIKit
       // Default is TopLeft
       pointValues = [rectOriginX, rectOriginY, rectWidth, rectOriginY, rectOriginX, rectHeight, rectOriginX, rectOriginY]
     }
-    trianglePath.moveToPoint(CGPoint(x: pointValues[0], y: pointValues[1]))
-    trianglePath.addLineToPoint(CGPoint(x: pointValues[2], y: pointValues[3]))
-    trianglePath.addLineToPoint(CGPoint(x: pointValues[4], y: pointValues[5]))
-    trianglePath.addLineToPoint(CGPoint(x: pointValues[6], y: pointValues[7]))
-    trianglePath.closePath()
-    UIColor.clearColor().setStroke()
+    trianglePath.move(to: CGPoint(x: pointValues[0], y: pointValues[1]))
+    trianglePath.addLine(to: CGPoint(x: pointValues[2], y: pointValues[3]))
+    trianglePath.addLine(to: CGPoint(x: pointValues[4], y: pointValues[5]))
+    trianglePath.addLine(to: CGPoint(x: pointValues[6], y: pointValues[7]))
+    trianglePath.close()
+    UIColor.clear.setStroke()
     viewColor.setFill()
     trianglePath.fill()
     trianglePath.stroke()
@@ -137,17 +137,17 @@ import UIKit
     self.clearChildViews()
     let (x, y, labelAngle,textWidth,textHeight) = getLabelPostion(newRect.width)
     let firstLabel = UILabel()
-    firstLabel.frame = CGRectMake(x, y, textWidth, textHeight)
+    firstLabel.frame = CGRect(x: x, y: y, width: textWidth, height: textHeight)
     firstLabel.text = labelText
-    firstLabel.transform = CGAffineTransformMakeRotation(labelAngle)
-    firstLabel.textAlignment = .Center
+    firstLabel.transform = CGAffineTransform(rotationAngle: labelAngle)
+    firstLabel.textAlignment = .center
     firstLabel.textColor = textColor
     firstLabel.changeFont(fontSize)
     self.addSubview(firstLabel)
   }
   
   /// Get the position of the label inside the label view.
-  private func getLabelPostion(length:CGFloat) -> (CGFloat,CGFloat,CGFloat,CGFloat,CGFloat) {
+  private func getLabelPostion(_ length:CGFloat) -> (CGFloat,CGFloat,CGFloat,CGFloat,CGFloat) {
     var x = CGFloat()
     var y = CGFloat()
     var labelAngle:CGFloat = 0
@@ -178,11 +178,11 @@ import UIKit
   }
   
   /// Get the width and height of the text.
-  private func getTextCGSize(text:String) -> (CGFloat,CGFloat) {
+  private func getTextCGSize(_ text:String) -> (CGFloat,CGFloat) {
     let uiFont:UIFont = UIFont.init(name: "HelveticaNeue-Bold", size: fontSize)!
     let textAttr = [NSFontAttributeName:uiFont]
     let nsText = text as NSString
-    let cgSize = nsText.sizeWithAttributes(textAttr)
+    let cgSize = nsText.size(attributes: textAttr)
     return (cgSize.width,cgSize.height)
   }
   
@@ -205,7 +205,7 @@ private extension UIView {
 
 /// Update the font of the text and fit it's width.
 private extension UILabel {
-  func changeFont(fontSize:CGFloat) {
+  func changeFont(_ fontSize:CGFloat) {
     font = UIFont(name: "HelveticaNeue-Bold", size: fontSize)
     adjustsFontSizeToFitWidth = true
   }
