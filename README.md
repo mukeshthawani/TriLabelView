@@ -85,7 +85,7 @@ src='https://raw.githubusercontent.com/mukeshthawani/TriLabelView/master/graphic
 
 ## Requirements
 
-- Swift 2.2 / Xcode 7.3
+- Swift 3 / Xcode 8
 - iOS 9.3
 
 ## Author
