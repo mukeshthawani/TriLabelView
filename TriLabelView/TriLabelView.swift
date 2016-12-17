@@ -172,7 +172,7 @@ import UIKit
     default:
       x = (1/3*rectWidth+rectOriginX) - textWidth/2
       y = (1/3*rectWidth+rectOriginY) - textHeight/2
-      labelAngle = (7*(3.14/4))
+      labelAngle = (7*CGFloat(3.14/4))
     }
     return(x,y,labelAngle,textWidth,textHeight)
   }
