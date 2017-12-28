@@ -39,7 +39,7 @@ view.addSubview(triLabelView)
 #### Customization
 ```Swift
 // Change Text
-triLabelView.text = "NEW"
+triLabelView.labelText = "NEW"
 
 // Adjust Length Percentage
 // You can update this to set percentage value of this
