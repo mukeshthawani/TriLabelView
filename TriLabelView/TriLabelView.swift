@@ -79,9 +79,6 @@ import UIKit
         }
     }
     
-    /// The font size of the text.
-    @IBInspectable public var fontSize:CGFloat = 20
-    
     /// The font for the label text.
     public var labelFont: UIFont = UIFont(name: "HelveticaNeue-Bold", size: 20)!
     
