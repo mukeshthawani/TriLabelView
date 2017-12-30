@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8.1
+osx_image: xcode9.2
 
 script:
   travis_retry xcodebuild clean build test -project TriLabelView.xcodeproj -scheme TriLabelView -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6'
