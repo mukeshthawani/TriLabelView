@@ -58,11 +58,11 @@ public enum Position:String {
 }
 ```
 
-You can update text color, font size and background color
+You can update text color, font and background color
 ```Swift
 triLabelView.textColor = UIColor.yellowColor()
 
-triLabelView.fontSize = 15
+triLabelView.labelFont = UIFont.systemFont(ofSize: 15)
 
 triLabelView.viewColor = UIColor.brownColor()
 ```
