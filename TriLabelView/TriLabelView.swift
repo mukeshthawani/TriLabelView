@@ -80,7 +80,11 @@ import UIKit
     }
     
     /// The font for the label text.
-    public var labelFont: UIFont = UIFont(name: "HelveticaNeue-Bold", size: 20)!
+    @IBInspectable public var labelFont: UIFont = UIFont.systemFont(ofSize: 15, weight: UIFontWeightBold) {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     /// The background color of the label view.
     @IBInspectable public var viewColor:UIColor = UIColor.blue {
