@@ -80,7 +80,7 @@ import UIKit
     }
     
     /// The font for the label text.
-    @IBInspectable public var labelFont: UIFont = UIFont.systemFont(ofSize: 15, weight: UIFontWeightBold) {
+    @IBInspectable public var labelFont: UIFont = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.bold) {
         didSet {
             setNeedsDisplay()
         }
