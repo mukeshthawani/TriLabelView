@@ -209,9 +209,9 @@ import UIKit
     
     /// Get the width and height of the text.
     private func getTextCGSize(_ text:String) -> (CGFloat,CGFloat) {
-        let textAttr = [NSFontAttributeName:labelFont]
+        let textAttr = [NSAttributedStringKey.font:labelFont]
         let nsText = text as NSString
-        let cgSize = nsText.size(attributes: textAttr)
+        let cgSize = nsText.size(withAttributes: textAttr)
         
         return (cgSize.width,cgSize.height)
     }
