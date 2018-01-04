@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
 
   s.platform     = :ios
-  s.ios.deployment_target = '9.3'
+  s.ios.deployment_target = '11.0'
   s.name         = "TriLabelView"
-  s.version      = "0.3.4"
+  s.version      = "1.0.0"
   s.summary      = "A triangle shaped corner label view for iOS written in Swift."
   s.homepage     = "https://github.com/mukeshthawani/TriLabelView"
   s.license      = { :type => "MIT", :file => "LICENSE" }

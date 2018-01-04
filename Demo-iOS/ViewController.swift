@@ -54,8 +54,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // Text Color
         cellTriLabel.textColor = UIColor.white
         
-        // Font Size
-        cellTriLabel.fontSize = 19
+        // Font
+        cellTriLabel.labelFont = UIFont(name: "HelveticaNeue-Bold", size: 19)!
         
         // Background Color
         cellTriLabel.viewColor = UIColor.brown
