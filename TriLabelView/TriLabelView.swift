@@ -71,6 +71,16 @@ import UIKit
             setNeedsDisplay()
         }
     }
+ 
+   @IBInspectable var cornerRadius: CGFloat {
+        get {
+           return layer.cornerRadius
+        }
+        set {
+           layer.cornerRadius = newValue
+           layer.masksToBounds = newValue > 0
+        }
+    }
     
     /// The text displayed by the label view.
     @IBInspectable public var labelText:String = "Hi" {
