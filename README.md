@@ -1,4 +1,4 @@
-# TriLabelView
+<p align="center"><img src="graphics/logotype-a.png"></p>
 
 # A triangle shaped corner label view for iOS written in Swift.
 
