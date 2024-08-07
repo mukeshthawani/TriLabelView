@@ -53,7 +53,9 @@ import UIKit
     // MARK: - Attributes
     
     /// The postion of the label view for IB.
-    @available(*, unavailable, message: "This property is reserved for IB. Use position instead")
+
+ /// This line works incorrectly with xcode 15.
+ // @available(*, unavailable, message: "This property is reserved for IB. Use position instead")
     @IBInspectable public var positionName: String? {
         didSet {
             setNeedsDisplay()
