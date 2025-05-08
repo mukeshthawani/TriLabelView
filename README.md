@@ -22,6 +22,17 @@ and run `pod install`.
     target 'Your target name'
     pod 'TriLabelView'
 
+## Setup with Swift Package Manager (SPM)
+
+You can use [Swift Package Manager](https://swift.org/package-manager/) to add TriLabelView to your project.
+
+1. In Xcode, go to **File > Add Packages...**
+2. Enter the repository URL:
+
+       https://github.com/mukeshthawani/TriLabelView.git
+
+3. Select the version and add the package to your target.
+
 ## Or Add source
 
 Simply add
